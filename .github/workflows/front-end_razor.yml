@@ -8,11 +8,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Perform static code analysis
+      uses: Secbyte/dotnet-sonarscanner@v1.2
+      with:
+        buildCommand: dotnet build .
+        testCommand: dotnet test .
+        projectKey: a-project-key
+        projectName: a-project-name
+        sonarOrganisation: an-org
+        verbose: "true"
+        openCoverPaths: "tests/coverage.opencover.xml"
+        coverageExclusions: "**test*.cs"
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - uses: actions/checkout@v1
+    
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.0.100
+    
     - name: Build with dotnet
       run: dotnet build --configuration Release
       working-directory: ./front-end/razor

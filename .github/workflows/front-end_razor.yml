@@ -13,9 +13,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.0.100
-    - name: Change Working Directory
-      run: cd ./front-end/razor/
-    - name: List current directory
-      run: ls -al .
     - name: Build with dotnet
       run: dotnet build --configuration Release
+      working-directory: ./front-end/razor

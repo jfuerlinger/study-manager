@@ -12,6 +12,8 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 2.2.108
+        dotnet-version: 3.0.100
+    - name: Change Working Directory
+      run: cd front-end/razor
     - name: Build with dotnet
       run: dotnet build --configuration Release
